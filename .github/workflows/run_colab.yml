@@ -1,0 +1,27 @@
+name: Run Colab Notebook Daily
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # jalankan setiap hari jam 02:00 UTC (09:00 WIB)
+  workflow_dispatch:        # bisa juga dijalankan manual dari GitHub UI
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install jupyter nbconvert nbformat
+
+      - name: Run notebook
+        run: |
+          jupyter nbconvert --to notebook --execute daily_notebook.ipynb --output output.ipynb
