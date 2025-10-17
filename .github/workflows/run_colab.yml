@@ -24,4 +24,4 @@ jobs:
 
       - name: Run notebook
         run: |
-          jupyter nbconvert --to notebook --execute daily_notebook.ipynb --output output.ipynb
+          jupyter nbconvert --to notebook --execute Notification_WA.ipynb --output output.ipynb
